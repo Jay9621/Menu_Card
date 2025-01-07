@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chinese Restaurant Receipt</title>
+    <style>
+        body {
+            font-family: "Trebuchet MS", sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-color: #ffe6cc;
+            color: #333;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            background-color: #b30000;
+            color: #fff;
+            padding: 15px;
+            margin: 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .header img {
+            height: 70px;
+            margin-right: 20px;
+            border-radius: 50%;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            margin: 0;
+            text-shadow: 2px 2px 4px #000;
+        }
+
+        .menu-card-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 20px 10px;
+            gap: 10px;
+        }
+
+        .menu-card {
+            border: 3px solid #b30000;
+            border-radius: 10px;
+            overflow: hidden;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 8px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .menu-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .menu {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 20px 10px;
+            gap: 15px;
+        }
+
+        .menu-item {
+            border: 2px solid #b30000;
+            border-radius: 8px;
+            padding: 15px;
+            background: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: calc(50% - 20px);
+            max-width: 150px;
+            flex-grow: 1;
+        }
+
+        .menu-item h3 {
+            font-size: 16px;
+            color: #b30000;
+            margin: 10px 0;
+        }
+
+        .menu-item p {
+            font-size: 14px;
+            color: #555;
+        }
+
+        .menu-item button {
+            padding: 8px 16px;
+            border: none;
+            background: #b30000;
+            color: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .menu-item button:hover {
+            background: #ff4d4d;
+        }
+
+        .receipt {
+            border: 2px dashed #b30000;
+            background: #fff;
+            padding: 20px;
+            width: 90%;
+            max-width: 400px;
+            margin: 20px auto;
+            text-align: left;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .receipt h2 {
+            color: #b30000;
+        }
+
+        .receipt p {
+            font-size: 14px;
+        }
+
+        .receipt .total {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        footer {
+            margin-top: 20px;
+            padding: 10px 0;
+            background-color: #b30000;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        @media (min-width: 768px) {
+            .header h1 {
+                font-size: 36px;
+            }
+
+            .menu-item {
+                width: calc(33.333% - 20px);
+                max-width: 200px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .menu-card-section {
+                gap: 20px;
+            }
+
+            .menu-item {
+                width: calc(25% - 20px);
+            }
+
+            .header img {
+                height: 90px;
+                margin-right: 40px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header with Hotel Name and Image -->
+    <div class="header">
+        <img src="dragon-logo.png" alt="Dragon Palace Logo">
+        <h1>Welcome to Dragon Palace</h1>
+    </div>
+
+    <!-- Menu Card Images -->
+    <div class="menu-card-section">
+        <div class="menu-card">
+            <img src="menu1.jpg" alt="Menu Card 1">
+        </div>
+        <div class="menu-card">
+            <img src="menu1.jpg" alt="Menu Card 2">
+        </div>
+    </div>
+
+    <!-- Menu Items -->
+    <h2>Our Special Menu</h2>
+    <div class="menu">
+        <div class="menu-item">
+            <h3>Spring Rolls</h3>
+            <p>$5.00</p>
+            <button onclick="addToReceipt('Spring Rolls', 5)">Add</button>
+        </div>
+        <div class="menu-item">
+            <h3>Fried Rice</h3>
+            <p>$8.00</p>
+            <button onclick="addToReceipt('Fried Rice', 8)">Add</button>
+        </div>
+        <div class="menu-item">
+            <h3>Sweet and Sour Chicken</h3>
+            <p>$10.00</p>
+            <button onclick="addToReceipt('Sweet and Sour Chicken', 10)">Add</button>
+        </div>
+        <div class="menu-item">
+            <h3>Kung Pao Chicken</h3>
+            <p>$12.00</p>
+            <button onclick="addToReceipt('Kung Pao Chicken', 12)">Add</button>
+        </div>
+        <div class="menu-item">
+            <h3>Dumplings</h3>
+            <p>$6.00</p>
+            <button onclick="addToReceipt('Dumplings', 6)">Add</button>
+        </div>
+    </div>
+
+    <!-- Receipt -->
+    <div class="receipt">
+        <h2>Your Receipt</h2>
+        <div id="receipt-items">
+            <p>No items yet.</p>
+        </div>
+        <p class="total">Total: $<span id="total-price">0.00</span></p>
+    </div>
+
+    <footer>
+        <p>© 2025 Dragon Palace - Experience Authentic Chinese Food</p>
+        <p>Prop. Prasanna Yadav | Contact: 9022843268</p>
+        <p>Address: Siddheshwar, Near Bk Stop, Sudhagad, Raigad</p>
+    </footer>
+    
+
+    <script>
+        let receiptItems = [];
+        let totalPrice = 0;
+
+        function addToReceipt(item, price) {
+            receiptItems.push({ name: item, price: price });
+            totalPrice += price;
+            displayReceipt();
+        }
+
+        function displayReceipt() {
+            const receiptContainer = document.getElementById('receipt-items');
+            const totalPriceElement = document.getElementById('total-price');
+            receiptContainer.innerHTML = '';
+            receiptItems.forEach((item, index) => {
+                const itemElement = document.createElement('p');
+                itemElement.textContent = `${index + 1}. ${item.name} - $${item.price.toFixed(2)}`;
+                receiptContainer.appendChild(itemElement);
+            });
+            totalPriceElement.textContent = totalPrice.toFixed(2);
+        }
+    </script>
+</body>
+
+</html>
